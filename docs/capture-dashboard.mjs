@@ -42,7 +42,15 @@ try {
   await page.locator("#field-toAccountId").selectOption({ index: 1 });
   await page.locator("#field-amount").fill("2300");
   await page.locator("#dialog-submit").click();
-  await page.locator("#operation-dialog").waitFor({ state: "hidden", timeout: 15000 });
+  try {
+    await page.locator("#operation-dialog").waitFor({ state: "hidden", timeout: 15000 });
+  } catch (error) {
+    console.error("Transfer dialog error:", await page.locator("#dialog-error").textContent());
+    console.error("From account:", await page.locator("#field-fromAccountId").inputValue());
+    console.error("To account:", await page.locator("#field-toAccountId").inputValue());
+    console.error("Amount:", await page.locator("#field-amount").inputValue());
+    throw error;
+  }
 
   await page.waitForFunction(() => document.querySelectorAll("#accounts-body tr").length === 3);
   await page.waitForFunction(() => document.querySelectorAll(".activity-row").length >= 2);
