@@ -55,6 +55,8 @@ try {
   await page.waitForFunction(() => document.querySelectorAll("#accounts-body tr").length === 3);
   await page.waitForFunction(() => document.querySelectorAll(".activity-row").length >= 2);
   await page.locator("#toast").evaluate((el) => { el.hidden = true; });
+  // A full-page screenshot should display the navigation at the top.
+  await page.addStyleTag({ content: ".sidebar { position: relative !important; top: 0 !important; height: auto !important; min-height: 100% !important; }" });
 
   await page.screenshot({
     path: "docs/assets/dashboard-real.png",
