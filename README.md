@@ -179,12 +179,3 @@ O ledger registra entradas de débito e crédito na aplicação, mas a consistê
 - [ ] Auditoria, reconciliação e observabilidade
 - [ ] Paginação e filtros para consultas de lançamentos
 
-## 👨‍💻 Autor
-
-**Walter Matheus** — Desenvolvimento Full Stack com foco em Java, Spring Boot e Angular.
-
-[![GitHub](https://img.shields.io/badge/GitHub-WalterMatheusgg-181717?logo=github)](https://github.com/WalterMatheusgg)
-
-## 📄 Licença
-
-Distribuído sob licença [MIT](LICENSE).
