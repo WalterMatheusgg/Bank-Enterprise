@@ -1,9 +1,15 @@
-name: Java CI
+name: Verify Java API and Dashboard
+
 on:
   push:
   pull_request:
+
+permissions:
+  contents: read
+
 jobs:
-  test:
+  java-tests:
+    name: Spring Boot / Flyway / H2 tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -12,5 +18,21 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Test and package
-        run: mvn -B -ntp verify
+      - name: Build and run integration tests
+        run: mvn -B -ntp clean verify
+
+  frontend-check:
+    name: JavaScript syntax and project assets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate dashboard JavaScript
+        run: node --check src/main/resources/static/assets/app.js
+      - name: Validate frontend resources exist
+        run: |
+          test -f src/main/resources/static/index.html
+          test -f src/main/resources/static/assets/styles.css
+          test -f src/main/resources/static/favicon.svg
