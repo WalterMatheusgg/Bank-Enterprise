@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-label="Prévia ilustrativa da API bancária no estilo OpenAPI Swagger, com contas, transferências e ledger">
-<title>Nexus Bank Enterprise — documentação visual da API</title>
-<desc>Representação ilustrativa dos endpoints reais. O projeto é uma API REST e não possui aplicativo bancário com interface gráfica.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-label="Vértice Bank: API REST, endpoints e operações bancárias">
+<title>Vértice Bank Enterprise — documentação visual da API</title>
+<desc>Endpoints bancários, contas, transferências e ledger.</desc>
 <defs>
 <linearGradient id="nav" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0B1830"/><stop offset="1" stop-color="#132D46"/></linearGradient>
 <linearGradient id="edge" x1="0" x2="1"><stop stop-color="#19B59C"/><stop offset="1" stop-color="#43B7ED"/></linearGradient>
@@ -17,8 +17,8 @@ text{font-family:Arial,Helvetica,sans-serif}.heading{fill:#1F3D53;font-weight:70
 <rect x="260" y="24" width="645" height="30" rx="7" fill="#263B51"/><text x="583" y="44" text-anchor="middle" fill="#B5CADD" font-size="12" class="mono">localhost:8080/swagger-ui/index.html</text>
 <rect x="12" y="66" width="1176" height="99" fill="#FFFFFF"/>
 <rect x="42" y="90" width="49" height="49" rx="12" fill="#0F263B"/>
-<text x="66.5" y="122" fill="#48D7BC" font-size="27" text-anchor="middle" font-weight="700">N</text>
-<text x="109" y="112" fill="#22374A" font-size="23" font-weight="750">NEXUS BANK</text><text x="110" y="134" font-size="12" fill="#1C9487" letter-spacing="3" font-weight="700">ENTERPRISE · REST API</text>
+<text x="66.5" y="122" fill="#48D7BC" font-size="27" text-anchor="middle" font-weight="700">V</text>
+<text x="109" y="112" fill="#22374A" font-size="23" font-weight="750">VÉRTICE BANK</text><text x="110" y="134" font-size="12" fill="#1C9487" letter-spacing="3" font-weight="700">ENTERPRISE · REST API</text>
 <text x="930" y="112" fill="#627E93" font-size="11" class="mono">Java 21  /  Spring Boot 3.5.6</text><text x="930" y="131" fill="#627E93" font-size="11" class="mono">OpenAPI  ·  PostgreSQL 16</text>
 <!-- content -->
 <text x="45" y="210" class="heading" font-size="24">Banking API</text><text x="45" y="237" fill="#7A90A1" font-size="13">Contas, transferências transacionais e lançamentos contábeis</text>
@@ -56,5 +56,5 @@ text{font-family:Arial,Helvetica,sans-serif}.heading{fill:#1F3D53;font-weight:70
 <rect x="794" y="503" width="331" height="49" rx="9" fill="#1E3A55"/><text x="960" y="524" text-anchor="middle" fill="#E7F3FC" font-size="13">Ledger: DEBIT + CREDIT</text><text x="960" y="541" text-anchor="middle" fill="#8EACBF" font-size="10">Registros vinculados à transferência</text>
 <text x="47" y="628" fill="#74889B" font-size="12">Explore os contratos reais em <tspan fill="#2E81AC" font-weight="700">/swagger-ui/index.html</tspan></text>
 <rect x="13" y="650" width="1174" height="27" rx="0" fill="#152940"/>
-<text x="600" y="668" text-anchor="middle" font-size="10" letter-spacing="1.1" fill="#C7DDE8">VISUALIZAÇÃO ILUSTRATIVA DOS ENDPOINTS IMPLEMENTADOS · NÃO É CAPTURA DE EXECUÇÃO</text>
+<text x="600" y="668" text-anchor="middle" font-size="11" letter-spacing="1.1" fill="#C7DDE8">JAVA 21  ·  SPRING BOOT  ·  POSTGRESQL  ·  OPENAPI</text>
 </svg>
