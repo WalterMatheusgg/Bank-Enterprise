@@ -39,9 +39,7 @@ A aplicação explora **transações ACID, locks pessimistas, idempotência, API
 
 </div>
 
-O painel é servido pelo próprio Spring Boot em **http://localhost:8080**. Possui autenticação demonstrativa, visão geral, listagem de contas, saldos, operações e consulta de movimentações. Todas as operações consultam a API.
 
-**Frontend real:** HTML5, CSS3 e JavaScript sem framework. **Não é Angular**; o foco deste repositório é o backend Java.
 
 ## 🚀 Funcionalidades
 
