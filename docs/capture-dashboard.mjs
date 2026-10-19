@@ -23,7 +23,7 @@ try {
     await page.locator("#dialog-submit").click();
     await page.locator("#operation-dialog").waitFor({ state: "hidden", timeout: 15000 });
   }
-  await createAccount("Nexus Tecnologia");
+  await createAccount("Vértice Serviços");
   await createAccount("Orion Sistemas");
   await createAccount("Helix Soluções");
 
