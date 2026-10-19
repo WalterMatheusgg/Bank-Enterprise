@@ -8,13 +8,27 @@
   [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
   [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
-  [![CI](https://github.com/WalterMatheusgg/Bank-Enterprise/actions/workflows/ci.yml/badge.svg)](https://github.com/WalterMatheusgg/Bank-Enterprise/actions/workflows/ci.yml)
+  [![CI](https://github.com/WalterMatheusgg/Sistema-Bancario-Empresarial/actions/workflows/ci.yml/badge.svg)](https://github.com/WalterMatheusgg/Sistema-Bancario-Empresarial/actions/workflows/ci.yml)
   [![License: MIT](https://img.shields.io/badge/License-MIT-00BFA6.svg)](LICENSE)
 
   **API REST para simular operações bancárias, com transferências transacionais, controle de concorrência e registro contábil.**
 
-  [Funcionalidades](#-funcionalidades) · [Arquitetura](#-arquitetura) · [Executar](#-como-executar) · [Endpoints](#-endpoints) · [Segurança](#-segurança-e-limitações)
+  [Prévia visual](#-prévia-visual-da-api) · [Funcionalidades](#-funcionalidades) · [Arquitetura](#-arquitetura) · [Executar](#-como-executar) · [Endpoints](#-endpoints) · [Limitações](#-segurança-e-limitações)
 </div>
+
+---
+
+## 🖥️ Prévia visual da API
+
+<div align="center">
+  <img width="100%" src="docs/assets/api-preview.svg" alt="Prévia ilustrativa da documentação Swagger/OpenAPI: endpoints de contas, transferências e ledger do Nexus Bank Enterprise" />
+  <br />
+  <sub>Imagem ilustrativa dos endpoints implementados, baseada nos controllers Java. Não é uma captura do servidor em execução.</sub>
+</div>
+
+O **Nexus Bank Enterprise é uma API REST**, e **não possui frontend bancário**. A interface para explorar seus recursos é o **Swagger UI**, disponível após iniciar a aplicação em [localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html).
+
+A API cobre criação e consulta de contas, transferências protegidas por chave de idempotência e consulta de lançamentos contábeis. [Explore os controllers](src/main/java/dev/nexusbank/) ou [execute os testes](src/test/java/dev/nexusbank/BankIntegrationTest.java).
 
 ---
 
@@ -23,7 +37,7 @@
 O **Nexus Bank Enterprise** é uma API desenvolvida com **Java 21 e Spring Boot 3** para demonstrar práticas de backend em um domínio financeiro: persistência relacional, operações atômicas, validações, idempotência, autenticação e testes de integração.
 
 > [!IMPORTANT]
-> **Projeto educacional e de portfólio.** Não é um banco real nem um serviço pronto para movimentar dinheiro em produção. As credenciais de demonstração e o banco H2 destinam-se apenas ao ambiente local.
+> **Projeto educacional e de portfólio, focado em backend.** Não é um banco real, não oferece aplicação frontend e não pode movimentar dinheiro em produção. H2 e credenciais de demonstração destinam-se exclusivamente ao ambiente local.
 
 ## 🚀 Funcionalidades
 
@@ -87,8 +101,8 @@ src/
 Pré-requisitos: **JDK 21** e **Maven 3.9+** instalados.
 
 ```bash
-git clone https://github.com/WalterMatheusgg/Bank-Enterprise.git
-cd Bank-Enterprise
+git clone https://github.com/WalterMatheusgg/Sistema-Bancario-Empresarial.git
+cd Sistema-Bancario-Empresarial
 mvn clean test
 mvn spring-boot:run
 ```
@@ -179,3 +193,14 @@ O ledger registra entradas de débito e crédito na aplicação, mas a consistê
 - [ ] Auditoria, reconciliação e observabilidade
 - [ ] Paginação e filtros para consultas de lançamentos
 
+
+
+---
+
+## 👨‍💻 Autor
+
+**Walter Matheus** · Desenvolvedor Full Stack com foco em Java, Spring Boot e Angular.
+
+[**Ver código-fonte**](https://github.com/WalterMatheusgg/Sistema-Bancario-Empresarial) · [**Outros projetos**](https://github.com/WalterMatheusgg?tab=repositories)
+
+> O painel acima ilustra a documentação da API, não uma interface de internet banking.
