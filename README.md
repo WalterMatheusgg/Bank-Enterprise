@@ -36,7 +36,6 @@ A aplicação explora **transações ACID, locks pessimistas, idempotência, API
 
 <img width="100%" src="docs/assets/dashboard-real.png" alt="Captura real do dashboard NexusBank: saldos, contas bancárias e movimentações de demonstração">
 
-<sub>Captura gerada executando o Spring Boot em uma base H2 temporária, com contas e operações inteiramente fictícias. O processo é reproduzível em <a href="docs/capture-dashboard.mjs">docs/capture-dashboard.mjs</a>.</sub>
 
 </div>
 
