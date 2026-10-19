@@ -1,0 +1,57 @@
+name: Capture running dashboard
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/main/resources/static/**'
+      - 'docs/capture-dashboard.mjs'
+      - '.github/workflows/dashboard-screenshot.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Start real API using temporary H2 database
+        run: |
+          mvn -B -ntp spring-boot:run > /tmp/nexusbank.log 2>&1 &
+          for i in $(seq 1 90); do
+            if curl -fsS http://127.0.0.1:8080/actuator/health >/dev/null; then
+              echo "API healthy"
+              exit 0
+            fi
+            sleep 2
+          done
+          cat /tmp/nexusbank.log
+          exit 1
+      - name: Capture real interface with fictional demo transactions
+        run: node docs/capture-dashboard.mjs
+      - name: Commit screenshot to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/assets/dashboard-real.png
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: update screenshot from running banking demo [skip ci]"
+            git push
+          fi
