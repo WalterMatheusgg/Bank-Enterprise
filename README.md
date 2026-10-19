@@ -1,233 +1,186 @@
 <div align="center">
 
-<img src="docs/assets/banner.svg" alt="NexusBank Enterprise | Sistema Bancário Empresarial" width="100%">
+<img src="docs/assets/banner.svg" alt="Vértice Bank · Sistema Bancário Empresarial" width="100%"/>
 
-# 🏦 Sistema Bancário Empresarial
-### NexusBank Enterprise · Java 21 · API REST + Painel Web
+# Vértice Bank
+### Sistema Bancário Empresarial · Java 21 · Spring Boot · PostgreSQL
 
-**Gerencie contas fictícias, realize créditos demonstrativos, execute transferências transacionais e consulte o histórico em uma interface web conectada ao Spring Boot.**
+**API bancária com painel web integrado, transferências transacionais, idempotência e histórico contábil.**
 
-![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.6-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![Java 21](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot 3](https://img.shields.io/badge/Spring_Boot-3.5.6-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 [![Java CI](https://github.com/WalterMatheusgg/Sistema-Bancario-Empresarial/actions/workflows/ci.yml/badge.svg)](https://github.com/WalterMatheusgg/Sistema-Bancario-Empresarial/actions/workflows/ci.yml)
-[![MIT](https://img.shields.io/badge/License-MIT-36D3B4)](LICENSE)
+[![Licença MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-16BDA3)](LICENSE)
 
-[Interface](#-interface-web) · [Funcionalidades](#-funcionalidades) · [Instalação](#-como-executar) · [API](#-endpoints) · [Arquitetura](#-arquitetura)
+[**Dashboard**](#-painel-do-sistema) · [**Funcionalidades**](#-funcionalidades) · [**Arquitetura**](#-arquitetura) · [**Executar**](#-executar-localmente) · [**API**](#-endpoints)
 
 </div>
 
 ---
 
-## ✨ Sobre o projeto
-
-O **NexusBank Enterprise** é um projeto de portfólio com backend **Java 21, Spring Boot 3, PostgreSQL e Flyway**. Além da API original, agora possui um painel bancário responsivo com fluxos reais integrados ao servidor: abertura de contas, crédito fictício, transferências e histórico.
-
-A aplicação explora **transações ACID, locks pessimistas, idempotência, API REST, persistência com JPA e testes automatizados**.
-
-> [!IMPORTANT]
-> **Projeto educacional.** Não é um banco real e não faz pagamentos ou transferências financeiras externas. Os créditos adicionados são somente valores simulados para testar a aplicação.
-
-## 🖥️ Interface web
+## 🖥️ Painel do sistema
 
 <div align="center">
-
-<img width="100%" src="docs/assets/dashboard-real.png" alt="Captura real do dashboard NexusBank: saldos, contas bancárias e movimentações de demonstração">
-
-
+  <img src="docs/assets/dashboard-real.png" width="100%" alt="Dashboard do Vértice Bank com contas, saldos, transferências e movimentações"/>
 </div>
 
+O painel web é servido pelo próprio **Spring Boot**, em `http://localhost:8080`. Nele é possível acompanhar saldos, consultar contas e movimentações e acessar operações conectadas à API REST.
 
+A interface utiliza **HTML5, CSS3 e JavaScript**, com acesso aos endpoints por `fetch`. O projeto preserva o foco em **engenharia backend Java**, incluindo transações, persistência e consistência dos dados.
 
-## 🚀 Funcionalidades
+## 🎯 Sobre o projeto
 
-| Área | Funcionalidades |
-|---|---|
-| 💳 Contas | Abertura, consulta, saldos e listagem paginada |
-| 🪙 Crédito de demonstração | Saldo fictício com auditoria própria e chave de idempotência |
-| 🔁 Transferências | Débito e crédito atômicos com saldo não negativo |
-| 🔒 Concorrência | Bloqueios pessimistas em ordem determinística entre contas |
-| 🔑 Idempotência | Repetir a mesma requisição não repete a operação |
-| 📒 Ledger | Duas entradas por transferência: débito e crédito |
-| 🧾 Histórico | Registros de depósitos simulados e lançamentos de transferências |
-| 🛡️ Segurança | HTTP Basic, BCrypt e validação de entradas |
-| 📚 Documentação | Swagger UI e OpenAPI |
-| 🧪 Testes | JUnit 5, MockMvc, H2, Maven e GitHub Actions |
-| 🐳 Infraestrutura | Docker Compose e PostgreSQL com volume persistente |
+O **Vértice Bank** é um sistema bancário de portfólio voltado ao desenvolvimento e à validação de fluxos financeiros em ambiente controlado. Combina uma API REST com interface web, base de dados relacional e operações rastreáveis.
+
+O objetivo é demonstrar técnicas aplicadas a sistemas que exigem consistência: **transações ACID, bloqueios pessimistas, validação, idempotência e lançamentos de débito/crédito**.
+
+> [!IMPORTANT]
+> **Ambiente de demonstração.** Não é uma instituição financeira nem processa pagamentos reais. Contas, créditos e transferências representam movimentações de teste.
+
+## ✨ Funcionalidades
+
+| Módulo | Recursos |
+|:--|:--|
+| 💳 **Contas** | Abertura de contas, identificação por UUID, saldos e consulta paginada |
+| 🪙 **Créditos de teste** | Inclusão de saldo de demonstração com histórico e idempotência |
+| 🔁 **Transferências** | Débito e crédito em uma transação atômica com `@Transactional` |
+| 🔐 **Concorrência** | Locks pessimistas com ordenação determinística das contas |
+| 🔑 **Idempotência** | Proteção contra repetição indevida de operações por `Idempotency-Key` |
+| 📒 **Ledger** | Entradas `DEBIT` e `CREDIT` associadas às transferências |
+| 📊 **Dashboard** | Contas, saldos, movimentações, formulários e indicadores conectados à API |
+| 🧪 **Qualidade** | Testes de integração, Maven e GitHub Actions |
+| 📖 **Documentação** | Swagger UI / OpenAPI e Actuator Health |
 
 ## 🧰 Tecnologias
 
-**Backend:** Java 21 · Spring Boot 3.5.6 · Spring Web · Spring Security · Spring Data JPA · Hibernate · Jakarta Validation
-
-**Banco:** PostgreSQL 16 · H2 em memória · Flyway · SQL
-
-**Web:** HTML5 · CSS3 · JavaScript ES2022 · Fetch API
-
-**Ferramentas:** Maven · JUnit · Spring Security Test · Swagger/OpenAPI · Docker · GitHub Actions · Playwright (captura real)
+| Área | Tecnologias |
+|:--|:--|
+| **Backend** | Java 21 · Spring Boot 3.5.6 · Spring Web · Spring Security · Spring Data JPA / Hibernate |
+| **Banco de dados** | PostgreSQL 16 · H2 local · Flyway · SQL |
+| **Interface** | HTML5 · CSS3 · JavaScript · Fetch API |
+| **Testes e qualidade** | JUnit 5 · Spring Security Test · Maven · GitHub Actions |
+| **Infraestrutura** | Docker · Docker Compose · Swagger/OpenAPI |
 
 ## 🏗️ Arquitetura
 
-~~~mermaid
+```mermaid
 flowchart TB
-    USER["Painel web / Swagger / curl"] --> AUTH["Spring Security HTTP Basic"]
-    AUTH --> API["Controllers /api/v1"]
-    API --> ACCOUNT["Contas"]
-    API --> DEPOSIT["Créditos fictícios"]
-    API --> TRANSFER["TransferService @Transactional"]
-    TRANSFER --> LEDGER["Ledger: DEBIT + CREDIT"]
-    ACCOUNT --> DB[("PostgreSQL ou H2")]
-    DEPOSIT --> DB
+    UI["Painel Web · HTML / CSS / JavaScript"] --> SEC["Spring Security · HTTP Basic"]
+    API["Swagger / Cliente HTTP"] --> SEC
+    SEC --> CTRL["Controllers REST · /api/v1"]
+    CTRL --> ACCOUNT["Contas e Créditos"]
+    CTRL --> TRANSFER["TransferService · @Transactional"]
+    TRANSFER --> LEDGER["Ledger · DEBIT + CREDIT"]
+    ACCOUNT --> DB[("PostgreSQL / H2")]
     TRANSFER --> DB
     LEDGER --> DB
-    FLYWAY["Migrações Flyway V1 e V2"] --> DB
-~~~
+    FLYWAY["Flyway · migrações versionadas"] --> DB
+```
 
-~~~text
-src/main/
-├── java/dev/nexusbank/
-│   ├── account/             # Contas e listagem
-│   ├── deposit/             # Créditos fictícios auditados
-│   ├── transfer/            # Transferências transacionais
-│   ├── ledger/              # Registros contábeis de transferências
-│   └── config/              # Autenticação e tratamento de erros
-└── resources/
-    ├── application.yml
-    ├── db/migration/        # V1 e V2 (sem sobrescrever versões)
-    └── static/              # Painel real: HTML, CSS e JavaScript
-src/test/java/dev/nexusbank/   # Testes de API e de integração
-docs/capture-dashboard.mjs     # Captura com servidor e navegador reais
-~~~
+A lógica de negócio fica nos serviços e repositórios, com autenticação e tratamento de erros separados dos controllers.
 
-## ⚡ Como executar
+```text
+src/
+├── main/
+│   ├── java/dev/nexusbank/
+│   │   ├── account/        # Contas, consultas e créditos
+│   │   ├── deposit/        # Operações de crédito para testes
+│   │   ├── transfer/       # Transações e idempotência
+│   │   ├── ledger/         # Lançamentos contábeis
+│   │   └── config/         # Segurança e respostas de erro
+│   └── resources/
+│       ├── static/         # Painel web
+│       ├── db/migration/   # Migrações Flyway
+│       └── application.yml
+└── test/                   # Testes de integração
+```
 
-### Alternativa 1 — Java e Maven (H2 local)
+## 🚀 Executar localmente
 
-Requisitos: **JDK 21** e **Maven 3.9+**.
+### Java e Maven
 
-~~~bash
+Pré-requisitos: **JDK 21** e **Maven 3.9+**.
+
+```bash
 git clone https://github.com/WalterMatheusgg/Sistema-Bancario-Empresarial.git
 cd Sistema-Bancario-Empresarial
 mvn clean verify
 mvn spring-boot:run
-~~~
+```
 
-Abra **http://localhost:8080** para o painel ou **http://localhost:8080/swagger-ui/index.html** para o Swagger.
+Abra **http://localhost:8080** para acessar o painel ou **http://localhost:8080/swagger-ui/index.html** para consultar a API.
 
-Somente em ambiente local, as credenciais de exemplo são:
+O perfil local de demonstração utiliza `admin` / `dev-only-change-me`. Antes de compartilhar um ambiente, defina uma senha própria com `BANK_ADMIN_PASSWORD`. O H2 em memória não preserva dados após reiniciar o processo.
 
-- **Usuário:** admin
-- **Senha:** dev-only-change-me
+### Docker Compose + PostgreSQL
 
-**Importante:** H2 é um banco em memória; ao reiniciar a aplicação, os dados de demonstração são descartados. Substitua a senha padrão se acessar a aplicação fora de sua máquina.
-
-### Alternativa 2 — Docker Compose + PostgreSQL
-
-~~~bash
+```bash
 cp .env.example .env
-# Edite o .env e defina senhas fortes.
+# Defina credenciais fortes no .env
 docker compose up --build -d
 docker compose ps
-~~~
+```
 
-Acesse **http://localhost:8080**. A API fica exposta apenas em <code>127.0.0.1:8080</code>, e os dados do PostgreSQL persistem no volume <code>postgres_data</code>.
+A API é exposta localmente em `127.0.0.1:8080`. O PostgreSQL utiliza o volume persistente `postgres_data`.
 
-~~~bash
+Para encerrar sem excluir os dados:
+
+```bash
 docker compose down
-~~~
+```
 
-> [!CAUTION]
-> Não publique seu arquivo <code>.env</code> e não use <code>docker compose down -v</code> se quiser preservar os dados.
+Evite versionar o `.env` e não use `docker compose down -v` se precisar manter o volume.
 
 ## 🔌 Endpoints
 
 | Método | Rota | Descrição |
-|---|---|---|
-| GET | <code>/actuator/health</code> | Saúde da aplicação (público) |
-| POST | <code>/api/v1/accounts</code> | Criar conta |
-| GET | <code>/api/v1/accounts?page=0&size=50</code> | Listar contas (até 100 por página) |
-| GET | <code>/api/v1/accounts/{id}</code> | Consultar saldo |
-| POST | <code>/api/v1/accounts/{id}/deposits</code> | Adicionar crédito fictício |
-| GET | <code>/api/v1/accounts/{id}/deposits</code> | Consultar créditos fictícios |
-| POST | <code>/api/v1/transfers</code> | Transferir entre contas |
-| GET | <code>/api/v1/transfers/{id}</code> | Consultar transferência |
-| GET | <code>/api/v1/accounts/{id}/ledger</code> | Consultar registros de transferências |
+|:--:|:--|:--|
+| `POST` | `/api/v1/accounts` | Criar conta |
+| `GET` | `/api/v1/accounts?page=0&size=50` | Listar contas |
+| `GET` | `/api/v1/accounts/{id}` | Consultar saldo |
+| `POST` | `/api/v1/accounts/{id}/deposits` | Crédito de demonstração |
+| `GET` | `/api/v1/accounts/{id}/deposits` | Consultar créditos |
+| `POST` | `/api/v1/transfers` | Transferir entre contas |
+| `GET` | `/api/v1/transfers/{id}` | Consultar transferência |
+| `GET` | `/api/v1/accounts/{id}/ledger` | Lançamentos da conta |
+| `GET` | `/actuator/health` | Estado da aplicação |
 
-As operações de negócio exigem autenticação. Créditos e transferências utilizam o cabeçalho <code>Idempotency-Key</code>.
+### Exemplo de transferência
 
-### Exemplo: criar uma conta
-
-~~~bash
+```bash
 curl -u admin:dev-only-change-me \
   -H "Content-Type: application/json" \
-  -d '{"ownerName":"Empresa Exemplo"}' \
-  http://localhost:8080/api/v1/accounts
-~~~
-
-### Exemplo: adicionar saldo fictício
-
-Substitua o identificador pelo UUID retornado ao criar a conta.
-
-~~~bash
-curl -u admin:dev-only-change-me \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: teste-credito-001" \
-  -d '{"amount":250.00}' \
-  http://localhost:8080/api/v1/accounts/UUID_DA_CONTA/deposits
-~~~
-
-### Exemplo: transferir entre duas contas
-
-~~~bash
-curl -u admin:dev-only-change-me \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: teste-transferencia-001" \
+  -H "Idempotency-Key: transferencia-demo-001" \
   -d '{"fromAccountId":"UUID_ORIGEM","toAccountId":"UUID_DESTINO","amount":50.00}' \
   http://localhost:8080/api/v1/transfers
-~~~
+```
 
-**Use uma chave inédita por operação nova.** A repetição da mesma chave com os mesmos dados recupera a operação anterior, sem duplicar o saldo.
+Substitua os UUIDs por identificadores de contas e utilize uma chave de idempotência nova para cada operação distinta.
 
-## 🧪 Testes e qualidade
+## 🧪 Testes e integração contínua
 
-~~~bash
+```bash
 mvn clean verify
 node --check src/main/resources/static/assets/app.js
-~~~
+```
 
-Os testes verificam crédito fictício, idempotência, conflito de chave, fluxo crédito → transferência, lançamentos do ledger, saldo insuficiente, autenticação da API e recursos do frontend.
+Os testes cobrem fluxos de contas, créditos de demonstração, transferências, idempotência, saldo insuficiente e lançamentos contábeis. Consulte os workflows de [CI Java](.github/workflows/ci.yml) e [captura do painel](.github/workflows/dashboard-screenshot.yml).
 
-O [workflow Java CI](.github/workflows/ci.yml) valida Java e JavaScript. O [workflow de screenshot](.github/workflows/dashboard-screenshot.yml) inicia a aplicação com H2, cria transações demonstrativas e captura o painel em Chromium.
+## 🔒 Segurança e evolução
 
-## 🔐 Segurança e limitações
+O sistema utiliza HTTP Basic, BCrypt e validação de entradas para o cenário de demonstração. **Não está homologado para operações bancárias reais.** Antes de qualquer uso externo seriam necessários controles adicionais, incluindo TLS, autenticação individual, autorização granular, gestão de segredos, proteção CSRF adequada, auditoria, reconciliação e testes de concorrência em PostgreSQL.
 
-Este projeto **não está pronto para produção bancária**:
-
-- Autenticação demonstrativa por **uma conta administrativa HTTP Basic**; ainda não há perfis de usuários, clientes separados nem OAuth2.
-- Os créditos fictícios possuem auditoria própria, mas **o ledger em partidas de débito e crédito cobre somente as transferências**.
-- A exclusividade da chave de idempotência é garantida no banco; ainda são necessários tratamentos extras para algumas disputas simultâneas entre contas distintas.
-- O dashboard mostra a primeira página de até 50 contas e histórico limitado por conta.
-- Antes de um cenário produtivo seriam necessários **TLS, controle de acesso individual, proteção CSRF compatível com autenticação de navegador, gestão de segredos, reconciliação contábil, backup e testes concorrentes com PostgreSQL**.
-
-## 🗺️ Próximas evoluções
-
-- [ ] Identidades e permissões por usuário
-- [ ] Ledger contábil completo para todas as movimentações
-- [ ] Testes de concorrência com PostgreSQL/Testcontainers
-- [ ] Pesquisa, filtros e paginação no painel
-- [ ] Auditoria operacional, métricas e deploy seguro
+**Próximas melhorias:** permissões por usuário, ledger completo para créditos, filtros e paginação avançada, observabilidade e testes concorrentes adicionais.
 
 ---
 
 <div align="center">
 
-### 👨‍💻 Walter Matheus
-Desenvolvedor Full Stack · Java · Spring Boot · Angular
+**Vértice Bank** · Engenharia Backend Java · Transações · API REST · Persistência
 
-[![GitHub](https://img.shields.io/badge/GitHub-WalterMatheusgg-181717?style=for-the-badge&logo=github)](https://github.com/WalterMatheusgg)
-[![Projeto NEXUS CRM](https://img.shields.io/badge/Outro_Projeto-NEXUS_CRM-4C81E7?style=for-the-badge)](https://github.com/WalterMatheusgg/NEXUS)
-
-Distribuído sob licença [MIT](LICENSE).
+Desenvolvido por [**Walter Matheus**](https://github.com/WalterMatheusgg) · Licença [MIT](LICENSE)
 
 </div>
