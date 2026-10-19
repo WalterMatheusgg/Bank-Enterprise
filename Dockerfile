@@ -6,7 +6,7 @@ RUN mvn -B -ntp package -DskipTests
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 RUN groupadd --system app && useradd --system --gid app app
-COPY --from=build /workspace/target/nexus-bank-enterprise-1.0.0.jar /app/app.jar
+COPY --from=build /workspace/target/vertice-bank-enterprise-1.0.0.jar /app/app.jar
 USER app
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app/app.jar"]
